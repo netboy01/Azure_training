@@ -1,0 +1,10 @@
+Question :- Create a PowerShell script to retrieve the status of the above VM. If it is not started, then the script should start the VM.
+
+$resourceGroup = "newreso"
+$vmName = "demo"
+
+$dc = Get-AzureRmVM -ResourceGroupName $resourceGroup -Name $vmName  -Status
+
+$status = $dc.Statuses.DisplayStatus | tail -1
+
+if($status = "VM running" ) {" VM is Running" } else { Start-AzureRmVM -ResourceGroupName $resourceGroup -Name $vmName}
